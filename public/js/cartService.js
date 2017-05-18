@@ -22,13 +22,16 @@ app.service("cartService", function($http) {
         // body -> { product: "...", price: ... }
         return $http({
             method: "POST",
-            url: "http://localhost:5000/api/items",
+            url: "/api/items",
             data: {
                 "product": item.product,
                 "price": item.price
             }
         }).then(function(response) {
+            console.log(response);
             return response.data;
+        }).catch(function(error){
+            console.log(error);
         });
         // TODO Make the HTTP request to the server and return a promise.
     };
@@ -39,9 +42,9 @@ app.service("cartService", function($http) {
     // matter what the value of the promise is.
     this.deleteItem = function(itemId) {
         // DELETE /api/items/{ID}
-        $http({
+        return $http({
             method: "DELETE",
-            url: "http://localhost:5000/api/items/" + itemId,
+            url: "/api/items/" + itemId,
         }).then(function(response) {
             return response;
         });

@@ -23,6 +23,7 @@ const pool = new pg.Pool({
 app.get('/api/items', (req, res) => {
 	pool.query("SELECT * FROM ShoppingCart").then( result => {
 		res.send(result.rows);
+		console.log(result.rows);
 	}).catch( error => {
 		console.log(error);
 	}); 
@@ -33,10 +34,10 @@ app.get('/api/items', (req, res) => {
 // TODO Handle this URL with appropriate Database interaction.
 app.post('/api/items', (req, res) => {
 	const body = req.body;
-	console.log(req.body);
 	const sql = "INSERT INTO ShoppingCart (product, price)" + "values($1::text, $2::real)";
 	const values = [body.product, body.price];
 	pool.query(sql, values).then( () => {
+		res.send('Inserted');
 		console.log('Inserted.');
 	});
 });
@@ -49,6 +50,7 @@ app.delete('/api/items/:id', (req, res) => {
 	const sql = "DELETE FROM ShoppingCart WHERE id=$1::int";
 	const values = [id];
 	pool.query(sql, values).then( () => {
+		res.send('Deleted');
 		console.log('Deleted.');
 	});
 });

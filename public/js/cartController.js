@@ -17,6 +17,7 @@ app.controller("cartController", function($scope, cartService) {
             // Update the list with the new set of items.
             cartService.getAllItems().then(function(items) {
                 $scope.items = items;
+                console.log(items);
             });
         });
     };
