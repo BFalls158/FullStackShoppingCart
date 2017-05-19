@@ -23,10 +23,7 @@ app.service("cartService", function($http) {
         return $http({
             method: "POST",
             url: "/api/items",
-            data: {
-                "product": item.product,
-                "price": item.price
-            }
+            data: item
         }).then(function(response) {
             console.log(response);
             return response.data;

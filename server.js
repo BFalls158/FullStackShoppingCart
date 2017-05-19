@@ -34,8 +34,8 @@ app.get('/api/items', (req, res) => {
 // TODO Handle this URL with appropriate Database interaction.
 app.post('/api/items', (req, res) => {
 	const body = req.body;
-	const sql = "INSERT INTO ShoppingCart (product, price)" + "values($1::text, $2::real)";
-	const values = [body.product, body.price];
+	const sql = "INSERT INTO ShoppingCart (product, price, quantity)" + "values($1::text, $2::real, $3::int)";
+	const values = [body.product, body.price, body.quantity];
 	pool.query(sql, values).then( () => {
 		res.send('Inserted');
 		console.log('Inserted.');
